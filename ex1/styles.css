@@ -34,14 +34,11 @@ body {
 }
 
 .container h1 {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .container .texto {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
+  display: none;
 }
 
 .container .form {
@@ -109,4 +106,17 @@ body {
 .container .invalid {
   background-color: var(--danger-color);
   color: white;
+}
+
+@media (min-width: 769px) {
+  .container .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .container h1 {
+    font-size: 24px;
+  }
 }
