@@ -88,24 +88,22 @@ body {
   text-align: center;
   padding: 10px;
   border-radius: 10px;
+  color: white;
 }
 
-/* Estilos do parágrafo de acorco com o status de imc */
+/* Estilos do parágrafo de acordo com o status de imc */
 
 .container .ok {
   background-color: var(--ok-color);
-  color: white;
 }
 
 .container .warning {
   background-color: var(--warning-color);
-  color: white;
 }
 
 .container .danger,
 .container .invalid {
   background-color: var(--danger-color);
-  color: white;
 }
 
 @media (min-width: 769px) {
