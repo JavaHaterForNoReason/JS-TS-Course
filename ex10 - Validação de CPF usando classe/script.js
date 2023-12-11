@@ -60,4 +60,4 @@ class ValidaCPF {
 }
 
 const cpf = new ValidaCPF("050.747.599-27");
-console.log(cpf);
+cpf.isValid();
