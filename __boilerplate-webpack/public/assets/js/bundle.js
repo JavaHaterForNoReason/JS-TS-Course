@@ -1,0 +1,2 @@
+(()=>{var e=prompt("Informe seu nome"),n=document.createElement("div"),t=document.createElement("p");t.innerText="Olá ".concat(e),n.appendChild(t),document.body.appendChild(n)})();
+//# sourceMappingURL=bundle.js.map
