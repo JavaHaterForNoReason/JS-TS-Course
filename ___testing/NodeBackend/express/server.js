@@ -12,3 +12,9 @@ app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000");
   console.log("Acessar: http://localhost:3000");
 });
+
+/**
+ * Nodemon: Funciona de forma parecida com o -w (watch), ou seja,
+ * ele fica "assistindo" o arquivo e, caso um alteração seja feita,
+ * ele atualiza a página automaticamente.
+ */
