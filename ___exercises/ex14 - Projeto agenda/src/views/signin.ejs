@@ -1,0 +1,56 @@
+<%- include("./includes/head") %>
+<body class="vh-100">
+  <%- include("./includes/navbar") %>
+  <div class="container-fluid overflow-y-hidden">
+    <div class="row vw-100">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 mt-5">
+        <h1 class="text-center">Signin</h1>
+        <p class="text-center lead">Crie uma conta</p>
+
+        <%- include("./includes/messages") %>
+
+        <div class="row">
+          <form
+            action="/signin/register"
+            method="post"
+            class="d-flex flex-column"
+          >
+            <input type="hidden" name="_csrf" value="<%= token %>" />
+            <div class="mb-3">
+              <label for="email" class="form-label">Insira um email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Crie uma senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-50 mx-auto">
+              Cadastrar
+            </button>
+
+            <div class="form-text align-self-center mt-2 fs-6">
+              Já tem cadastro?
+              <a
+                href="/login/index"
+                class="link-underline link-underline-opacity-0"
+                >Então entre na sua conta</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+</body>
