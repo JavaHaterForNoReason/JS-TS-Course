@@ -4,6 +4,7 @@ const homeController = require("./src/controllers/homeController");
 const loginController = require("./src/controllers/loginControlller");
 const signinController = require("./src/controllers/signinController");
 const changePasswordController = require("./src/controllers/changePasswordController");
+const contactController = require("./src/controllers/contactController");
 
 router.get("/", homeController.index);
 router.get("/home", homeController.home);
@@ -18,7 +19,10 @@ router.get("/signin/index", signinController.index);
 router.post("/signin/register", signinController.register);
 
 // //Mudar senha
-// router.get("/change-pass/index", changePasswordController.index)
-// router.post("/change-pass/change", changePasswordController.change)
+router.get("/change-pass/index", changePasswordController.index);
+router.post("/change-pass/change", changePasswordController.change);
+
+//Contatos
+router.get("/contact/index", contactController.index);
 
 module.exports = router;

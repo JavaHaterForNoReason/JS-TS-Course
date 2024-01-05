@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
+  confirmPass: { type: String },
 });
 
 const UserModel = mongoose.model("Users", UserSchema);
@@ -14,6 +15,7 @@ class User {
     this.body = body;
     this.errors = [];
     this.user = null;
+    console.log(body);
   }
 
   async enter() {
@@ -37,13 +39,36 @@ class User {
   async register() {
     this.validate();
     if (this.errors.length > 0) return;
-    const salt = bcrypt.genSaltSync();
-    this.body.password = bcrypt.hashSync(this.body.password, salt);
+    this.hashPass();
 
     await this.userExists();
     if (this.errors.length > 0) return;
 
     this.user = await UserModel.create(this.body);
+  }
+
+  async changePass() {
+    this.validate();
+    if (this.errors.length > 0) return;
+
+    this.user = await UserModel.findOne({ email: this.body.email });
+
+    if (!this.user) {
+      this.errors.push("Usuário não existe");
+      return;
+    }
+
+    if (this.body.password !== this.body.confirmPass) {
+      this.errors.push("As senhas não coincidem");
+      return;
+    }
+
+    this.hashPass();
+
+    await UserModel.updateOne(
+      { _id: this.user._id },
+      { password: this.body.password }
+    );
   }
 
   validate() {
@@ -60,10 +85,18 @@ class User {
       }
     }
 
-    this.body = {
-      email: this.body.email,
-      password: this.body.password,
-    };
+    if (this.body.confirmPass) {
+      this.body = {
+        email: this.body.email,
+        password: this.body.password,
+        confirmPass: this.body.confirmPass,
+      };
+    } else {
+      this.body = {
+        email: this.body.email,
+        password: this.body.password,
+      };
+    }
   }
 
   async userExists() {
@@ -74,6 +107,11 @@ class User {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  hashPass() {
+    const salt = bcrypt.genSaltSync();
+    this.body.password = bcrypt.hashSync(this.body.password, salt);
   }
 }
 

@@ -1,28 +1,23 @@
 const User = require("../models/UserModel");
 
 exports.index = (req, res) => {
-  if (req.session.user) {
-    res.redirect("/home");
-  }
-
-  res.render("signin");
+  res.render("change-pass");
 };
 
-exports.register = async (req, res) => {
+exports.change = async (req, res) => {
   try {
     const user = new User(req.body);
-    await user.register();
+    await user.changePass();
 
     if (user.errors.length > 0) {
       req.flash("errors", user.errors);
       req.session.save(() => {
-        return res.redirect("/signin/index");
+        return res.redirect("/change-pass/index");
       });
       return;
     }
 
-    req.session.user = user.user;
-    res.redirect("/home");
+    res.redirect("/login/index");
   } catch (err) {
     console.error(err);
     res.render("error");

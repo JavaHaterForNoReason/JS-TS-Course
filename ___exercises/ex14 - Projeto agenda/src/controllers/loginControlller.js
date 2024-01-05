@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
     }
 
     req.session.user = user.user;
-    res.redirect("/");
+    res.redirect("/home");
   } catch (err) {
     console.error(err);
     res.render("error");

@@ -5,16 +5,20 @@
     <div class="row vw-100">
       <div class="col-lg-2"></div>
       <div class="col-lg-8 mt-5">
-        <h1 class="text-center">Login</h1>
-        <p class="text-center lead">Entre na sua conta</p>
+        <h1 class="text-center">Mudar senha</h1>
+        <p class="text-center lead">Mude sua senha caso tenha esquecido</p>
 
         <%- include("./includes/messages") %>
 
         <div class="row">
-          <form action="/login/login" method="post" class="d-flex flex-column">
+          <form
+            action="/change-pass/change"
+            method="post"
+            class="d-flex flex-column"
+          >
             <input type="hidden" name="_csrf" value="<%= token %>" />
             <div class="mb-3">
-              <label for="email" class="form-label">Seu email</label>
+              <label for="email" class="form-label">Email cadastrado</label>
               <input
                 type="email"
                 class="form-control"
@@ -22,8 +26,8 @@
                 name="email"
               />
             </div>
-            <div>
-              <label for="password" class="form-label">Sua senha</label>
+            <div class="mb-3">
+              <label for="password" class="form-label">Nova senha</label>
               <input
                 type="password"
                 class="form-control"
@@ -31,25 +35,21 @@
                 name="password"
               />
             </div>
-            <div class="form-text align-self-end">
-              <a
-                href="/change-pass/index"
-                class="link-underline link-underline-opacity-0"
-                >Esqueceu sua senha?</a
+            <div class="mb-3">
+              <label for="c-password" class="form-label"
+                >Confirme a senha</label
               >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPass"
+                name="confirmPass"
+              />
             </div>
-            <button type="submit" class="btn btn-primary w-50 mx-auto">
-              Entrar
-            </button>
 
-            <div class="form-text align-self-center mt-2 fs-6">
-              Ainda não tem cadastro?
-              <a
-                href="/signin/index"
-                class="link-underline link-underline-opacity-0"
-                >Então cadastre-se</a
-              >
-            </div>
+            <button type="submit" class="btn btn-primary w-50 mx-auto">
+              Mudar
+            </button>
           </form>
         </div>
       </div>
