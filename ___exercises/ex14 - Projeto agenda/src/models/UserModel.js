@@ -15,7 +15,6 @@ class User {
     this.body = body;
     this.errors = [];
     this.user = null;
-    console.log(body);
   }
 
   async enter() {
@@ -38,11 +37,9 @@ class User {
 
   async register() {
     this.validate();
-    if (this.errors.length > 0) return;
-    this.hashPass();
-
     await this.userExists();
     if (this.errors.length > 0) return;
+    this.hashPass();
 
     this.user = await UserModel.create(this.body);
   }
@@ -74,7 +71,7 @@ class User {
   validate() {
     this.clean();
     if (!validator.isEmail(this.body.email)) this.errors.push("Email inválido");
-    if (this.body.password.length < 6 || this.body.password.length > 8)
+    if (!validator.isLength(this.body.password, { min: 6, max: 8 }))
       this.errors.push("A senha precisa ter entre 6 e 8 caracteres");
   }
 
@@ -85,18 +82,7 @@ class User {
       }
     }
 
-    if (this.body.confirmPass) {
-      this.body = {
-        email: this.body.email,
-        password: this.body.password,
-        confirmPass: this.body.confirmPass,
-      };
-    } else {
-      this.body = {
-        email: this.body.email,
-        password: this.body.password,
-      };
-    }
+    delete this.body._csrf;
   }
 
   async userExists() {

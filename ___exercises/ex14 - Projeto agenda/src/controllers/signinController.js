@@ -1,10 +1,6 @@
 const User = require("../models/UserModel");
 
 exports.index = (req, res) => {
-  if (req.session.user) {
-    res.redirect("/home");
-  }
-
   res.render("signin");
 };
 
@@ -22,7 +18,7 @@ exports.register = async (req, res) => {
     }
 
     req.session.user = user.user;
-    res.redirect("/home");
+    res.redirect("/contact/index");
   } catch (err) {
     console.error(err);
     res.render("error");

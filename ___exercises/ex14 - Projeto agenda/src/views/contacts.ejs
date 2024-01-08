@@ -1,0 +1,53 @@
+<%- include("./includes/head") %>
+<body class="vh-100">
+  <%- include("./includes/navbar") %>
+  <div class="container-fluid overflow-y-hidden">
+    <div class="row vw-100">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 mt-5">
+        <h1 class="text-center">Contatos</h1>
+
+        <div class="resposive-table">
+          <table class="table">
+            <thead>
+              <tr class="text-center fw-bold">
+                <td>Nome</td>
+                <td>Sobrenome</td>
+                <td>Email</td>
+                <td>Telefone</td>
+                <td>Ações</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% contacts.forEach(contact => { %>
+              <tr class="text-center">
+                <td><%= contact.name %></td>
+                <td><%= contact.lastname %></td>
+                <td><%= contact.email %></td>
+                <td><%= contact.tel %></td>
+                <td class="d-flex justify-content-center gap-2">
+                  <a
+                    href="/contact/edit/<%= contact._id %>"
+                    class="btn btn-primary"
+                    ><i class="fa-solid fa-pen-to-square"></i
+                  ></a>
+                  <form
+                    action="/contact/delete/<%= contact._id %>"
+                    method="post"
+                  >
+                    <input type="hidden" name="_csrf" value="<%= token %>" />
+                    <button type="submit" class="btn btn-danger">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+</body>
