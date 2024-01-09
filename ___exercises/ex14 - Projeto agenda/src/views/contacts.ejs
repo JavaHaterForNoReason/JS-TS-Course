@@ -6,7 +6,7 @@
       <div class="col-lg-2"></div>
       <div class="col-lg-8 mt-5">
         <h1 class="text-center">Contatos</h1>
-
+        <% if (contacts.length !== 0) { %>
         <div class="resposive-table">
           <table class="table">
             <thead>
@@ -24,7 +24,10 @@
                 <td><%= contact.name %></td>
                 <td><%= contact.lastname %></td>
                 <td><%= contact.email %></td>
-                <td><%= contact.tel %></td>
+                <td>
+                  <%= contact.tel.replace(/(\d{2})(\d{1})(\d{4})(\d{4})/,
+                  "\($1\) $2 $3-$4") %>
+                </td>
                 <td class="d-flex justify-content-center gap-2">
                   <a
                     href="/contact/edit/<%= contact._id %>"
@@ -46,6 +49,9 @@
             </tbody>
           </table>
         </div>
+        <% } else { %>
+        <p class="text-center lead">Você ainda não criou nenhum contato</p>
+        <% } %>
       </div>
       <div class="col-lg-2"></div>
     </div>
