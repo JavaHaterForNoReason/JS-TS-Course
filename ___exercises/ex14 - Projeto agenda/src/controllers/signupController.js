@@ -1,7 +1,7 @@
 const User = require("../models/UserModel");
 
 exports.index = (req, res) => {
-  res.render("signin");
+  res.render("signup");
 };
 
 exports.register = async (req, res) => {
@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
     if (user.errors.length > 0) {
       req.flash("errors", user.errors);
       req.session.save(() => {
-        return res.redirect("/signin/index");
+        return res.redirect("/signup/index");
       });
       return;
     }

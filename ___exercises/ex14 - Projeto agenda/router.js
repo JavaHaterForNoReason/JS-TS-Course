@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const homeController = require("./src/controllers/homeController");
 const loginController = require("./src/controllers/loginControlller");
-const signinController = require("./src/controllers/signinController");
+const signupController = require("./src/controllers/signupController");
 const changePasswordController = require("./src/controllers/changePasswordController");
 const contactController = require("./src/controllers/contactController");
 const {
@@ -18,8 +18,8 @@ router.post("/login/index", loginController.login);
 router.post("/login/logout", loginController.logout);
 
 //Cadastro
-router.get("/signin/index", isUserLogged, signinController.index);
-router.post("/signin/index", signinController.register);
+router.get("/signup/index", isUserLogged, signupController.index);
+router.post("/signup/index", signupController.register);
 
 // //Mudar senha
 router.get("/change-pass/index", isUserLogged, changePasswordController.index);
