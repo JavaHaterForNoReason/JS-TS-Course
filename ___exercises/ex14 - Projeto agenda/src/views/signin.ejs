@@ -11,7 +11,11 @@
         <%- include("./includes/messages") %>
 
         <div class="row">
-          <form action="/signin/index" method="post" class="d-flex flex-column">
+          <form
+            action="/signin/index"
+            method="post"
+            class="d-flex flex-column register-form"
+          >
             <input type="hidden" name="_csrf" value="<%= token %>" />
             <div class="mb-3">
               <label for="email" class="form-label">Insira um email</label>

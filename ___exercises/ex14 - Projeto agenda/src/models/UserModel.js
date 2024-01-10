@@ -41,6 +41,7 @@ class User {
     if (this.errors.length > 0) return;
     this.hashPass();
 
+    delete this.body.confirmPass;
     this.user = await UserModel.create(this.body);
   }
 

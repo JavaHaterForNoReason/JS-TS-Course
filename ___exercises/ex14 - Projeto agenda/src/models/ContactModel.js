@@ -50,7 +50,6 @@ class Contact {
       this.body.tel && { tel: this.body.tel },
     ];
     conditions = conditions.filter((condition) => condition !== "");
-    console.log(conditions);
 
     try {
       const contact = await ContactModel.findOne({
@@ -72,7 +71,10 @@ class Contact {
     this.clean();
     if (this.body.email && !validator.isEmail(this.body.email))
       this.errors.push("Email inválido");
-    if (this.body.tel && /\D/g.test(this.body.tel))
+    if (
+      this.body.tel &&
+      (/\D/g.test(this.body.tel) || this.body.tel.length !== 11)
+    )
       this.errors.push("Telefone inválido");
     if (!this.body.email && !this.body.tel) {
       this.errors.push(

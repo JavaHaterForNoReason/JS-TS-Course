@@ -12,9 +12,9 @@
 
         <div class="row">
           <% if(contact._id) { %>
-            <form action="/contact/edit/<%= contact._id %>" method="post" class="d-flex flex-column">
+            <form action="/contact/edit/<%= contact._id %>" method="post" class="d-flex flex-column contact-form">
           <% } else { %>
-            <form action="/contact/add" method="post" class="d-flex flex-column">
+            <form action="/contact/add" method="post" class="d-flex flex-column contact-form">
           <% } %>
             <input type="hidden" name="_csrf" value="<%= token %>" />
             <div class="mb-3">
