@@ -16,13 +16,12 @@ const mongoose = require("mongoose");
 mongoose
   .connect(process.env.CONNECTION_STRING)
   .then(() => {
-    console.log("conectou");
     app.emit("pronto");
   })
   .catch((e) => console.error(e));
 
 const sessionOptions = session({
-  secret: "Luan1009",
+  secret: "",
   store: MongoStore.create({ mongoUrl: process.env.CONNECTION_STRING }),
   resave: false,
   saveUninitialized: false,
@@ -34,19 +33,9 @@ const sessionOptions = session({
 
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: [
-          "'self'",
-          "https://cdn.jsdelivr.net",
-          "https://code.jquery.com",
-          "https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd",
-        ],
-      },
-    },
+    contentSecurityPolicy: false,
   })
-);
+);pm
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
@@ -60,8 +49,5 @@ app.set("views", path.resolve(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 
 app.on("pronto", () => {
-  app.listen(8080, () => {
-    console.log("Servidor rodando na porta 8080");
-    console.log("Acessar: http://localhost:8080");
-  });
+  app.listen(8080);
 });
